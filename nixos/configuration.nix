@@ -4,7 +4,7 @@
 {
   config,
   pkgs,
-  inputs, 
+
   ...
 }: {
   imports = [
@@ -28,7 +28,6 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   programs.hyprland.enable = true;
-  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
