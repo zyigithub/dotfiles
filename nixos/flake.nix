@@ -11,49 +11,52 @@
     ags.url = "github:Aylur/ags";
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    home-manager,
-    ...
-  }: let
-    system = "x86_64-linux";
-    username = "zyi";
-  in {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit system;
-          inherit inputs;
-        };
+  outputs =
+    inputs@{
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+      username = "zyi";
+    in
+    {
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+          };
 
-        modules = [
-          ./configuration.nix
+          modules = [
+            ./configuration.nix
+            ./virt.nix
 
-          home-manager.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
 
-          {
+            {
               home-manager = {
                 backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = {inherit inputs;};
+                extraSpecialArgs = {
+                  inherit inputs;
+                };
                 users.${username} = {
                   home.username = username;
                   home.homeDirectory = "/home/${username}";
                   imports = [
                     ./ags.nix
                     ./home.nix
+
                   ];
                 };
               };
-
-
-            
-          }
-        ];
+            }
+          ];
+        };
       };
-    };
 
-   
-  };
+    };
 }

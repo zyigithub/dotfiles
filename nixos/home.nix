@@ -45,7 +45,9 @@
     mpv
     vlc
     slurp
-
+    micro 
+	okular
+    
     alejandra
     anyrun
   ];
@@ -59,7 +61,7 @@
     };
 
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
 
@@ -83,13 +85,7 @@
     size = 16;
   };
 
-  wayland.windowManager.hyprland.settings = {
-    enable = true;
-    general = {
-      "gaps_in" = "5";
-      "gaps_out" = "8"; 
-    }; 
-  };
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

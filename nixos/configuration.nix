@@ -6,7 +6,8 @@
   pkgs,
 
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
 
@@ -18,14 +19,17 @@
     efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
-      devices = ["nodev"];
+      devices = [ "nodev" ];
       efiSupport = true;
       useOSProber = true;
     };
   };
 
   #flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   programs.hyprland.enable = true;
 
@@ -74,20 +78,23 @@
     variant = "";
   };
 
+
   # Zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = {
+    shellAliases = let 
+    	editor = "micro";
+    in {
       ll = "ls -l";
       nigger = "sudo nixos-rebuild switch";
       zen = "flatpak run io.github.zen_browser.zen & disown";
       flake = "nano ~/.config/home-manager/flake.nix";
       home = "nano ~/.config/home-manager/home.nix";
       siu = "sudo nixos-rebuild switch --flake ~/nixos/";
-      hypr = "nano .config/hypr/hyprland.conf";
+      hypr = "${editor} .config/hypr/hyprland.conf";
       nigga = "sudo nano /etc/nixos/configuration.nix";
     };
 
@@ -102,8 +109,14 @@
     isNormalUser = true;
     description = "zyi";
     shell = pkgs.zsh;
-    extraGroups = ["networkmanager" "wheel" "sound" "audio" "video"];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "sound"
+      "audio"
+      "video"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -127,10 +140,11 @@
     nixd
     networkmanagerapplet
     nixfmt-rfc-style
+    go
   ];
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
