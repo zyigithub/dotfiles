@@ -31,7 +31,15 @@
     "flakes"
   ];
 
+
   programs.hyprland.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -122,6 +130,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -135,12 +144,18 @@
     stow
     vesktop
     tree
-    pcmanfm
     vscode
     nixd
     networkmanagerapplet
     nixfmt-rfc-style
     go
+    firefox-bin
+    python313
+    poetry
+    gcc-unwrapped
+    nodejs_22
+    ollama
+    obs-studio
   ];
 
   fonts.packages = with pkgs; [
@@ -172,5 +187,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

@@ -32,6 +32,7 @@
     neofetch
     nwg-look
     swaybg
+    hyprpaper
     waybar
 
     #gtk
@@ -47,9 +48,21 @@
     slurp
     micro 
 	okular
+	zip
+	btop
     
     alejandra
     anyrun
+	dig
+
+	xfce.thunar
+	xfce.thunar-volman
+	xfce.thunar-dropbox-plugin
+	xfce.thunar-archive-plugin
+	xfce.thunar-media-tags-plugin
+
+    libreoffice-qt6-fresh
+	abiword
   ];
 
   gtk = {

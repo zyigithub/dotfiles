@@ -22,6 +22,7 @@
     spice-protocol
     virt-viewer
     wget
+    
     #virtio-win
     #win-spice
   ];
